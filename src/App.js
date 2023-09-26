@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import './App.css';
 
@@ -70,13 +70,22 @@ const DescriptionBox = styled.textarea`
 `;
 
 function App() {
-  const [tasks, setTasks] = useState({
+
+
+  const savedTasks = JSON.parse(localStorage.getItem('eisenhowerTasks'));
+
+  const [tasks, setTasks] = useState(savedTasks || {
     'urgent-important': [],
     'not-urgent-important': [],
     'urgent-not-important': [],
     'not-urgent-not-important': [],
     'quick-tasks': [],
   });
+
+  // Save tasks to localStorage every time they're updated
+  useEffect(() => {
+    localStorage.setItem('eisenhowerTasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   const [completedTasks, setCompletedTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
