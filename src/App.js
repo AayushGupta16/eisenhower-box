@@ -71,9 +71,9 @@ const DescriptionBox = styled.textarea`
 
 function App() {
 
-
   const savedTasks = JSON.parse(localStorage.getItem('eisenhowerTasks'));
-
+  const savedCompletedTasks = JSON.parse(localStorage.getItem('completedEisenhowerTasks'));
+  
   const [tasks, setTasks] = useState(savedTasks || {
     'urgent-important': [],
     'not-urgent-important': [],
@@ -81,94 +81,77 @@ function App() {
     'not-urgent-not-important': [],
     'quick-tasks': [],
   });
-
-  // Save tasks to localStorage every time they're updated
+  
+  const [completedTasks, setCompletedTasks] = useState(savedCompletedTasks || []);
+  const [selectedTask, setSelectedTask] = useState(null);
+  
   useEffect(() => {
     localStorage.setItem('eisenhowerTasks', JSON.stringify(tasks));
   }, [tasks]);
-
-  const [completedTasks, setCompletedTasks] = useState([]);
-  const [selectedTask, setSelectedTask] = useState(null);
-  const [description, setDescription] = useState('');
-  const [descriptionInput, setDescriptionInput] = useState("");
-
+  
+  useEffect(() => {
+    localStorage.setItem('completedEisenhowerTasks', JSON.stringify(completedTasks));
+  }, [completedTasks]);
+  
   const addTask = (quadrant, task) => {
     setTasks((prevTasks) => ({
       ...prevTasks,
       [quadrant]: [...prevTasks[quadrant], { title: task, description: '' }],
     }));
   };
-
-  const deleteTask = (quadrant, index) => {
-    setTasks((prevTasks) => {
-      const newTasks = [...prevTasks[quadrant]];
+  
+  const deleteCompletedTask = (index) => {
+    setCompletedTasks(prev => {
+      const newTasks = [...prev];
       newTasks.splice(index, 1);
-      return { ...prevTasks, [quadrant]: newTasks };
+      return newTasks;
     });
   };
-
-  const markAsComplete = (quadrant, index) => {
-    const taskToComplete = tasks[quadrant][index];
-    setCompletedTasks([...completedTasks, taskToComplete]);
-    deleteTask(quadrant, index);
-  };
-
   
   const handleTaskCompletion = (task, quadrant) => {
-    // Move task to completed tasks
     setCompletedTasks(prevTasks => [...prevTasks, task]);
-
-    // Remove task from its current quadrant
     setTasks(prevTasks => {
-        const updatedTasks = { ...prevTasks };
-        updatedTasks[quadrant] = updatedTasks[quadrant].filter(t => t !== task);
-        return updatedTasks;
+      const updatedTasks = { ...prevTasks };
+      updatedTasks[quadrant] = updatedTasks[quadrant].filter(t => t !== task);
+      return updatedTasks;
     });
-};
-
-const updateTaskDescription = (selectedTask, newDescription) => {
-  // Find the quadrant or section the task belongs to
-  const taskType = Object.keys(tasks).find(key => 
-      tasks[key].some(task => task.title === selectedTask.title)
-  );
-
-  if (taskType) {
-      // Find the specific task
-      const taskIndex = tasks[taskType].findIndex(task => task.title === selectedTask.title);
-      
-      // Create a copy of the tasks object to avoid mutating state directly
-      const updatedTasks = { ...tasks };
-
-      // Update the task's description
-      if (updatedTasks[taskType][taskIndex]) {
-          updatedTasks[taskType][taskIndex].description = newDescription;
-      }
-
-      // Update the tasks state
-      setTasks(updatedTasks);
-  }
-}
-
-const handleTaskDeletion = (task, quadrant) => {
-    // Remove task from its current quadrant
-    setTasks(prevTasks => {
-        const updatedTasks = { ...prevTasks };
-        updatedTasks[quadrant] = updatedTasks[quadrant].filter(t => t !== task);
-        return updatedTasks;
-    });
-};
-
-  const handleTaskClick = (task) => {
-    setSelectedTask(task);
-    setDescription(task.description);
   };
   
+  const updateTaskDescription = (selectedTask, newDescription) => {
+    const taskType = Object.keys(tasks).find(key => 
+      tasks[key].some(task => task.title === selectedTask.title)
+    );
+  
+    if (taskType) {
+      const taskIndex = tasks[taskType].findIndex(task => task.title === selectedTask.title);
+      const updatedTasks = { ...tasks };
+  
+      if (updatedTasks[taskType][taskIndex]) {
+        updatedTasks[taskType][taskIndex].description = newDescription;
+      }
+  
+      setTasks(updatedTasks);
+    }
+  };
+  
+  const handleTaskDeletion = (task, quadrant) => {
+    setTasks(prevTasks => {
+      const updatedTasks = { ...prevTasks };
+      updatedTasks[quadrant] = updatedTasks[quadrant].filter(t => t !== task);
+      return updatedTasks;
+    });
+  };
+  
+  const handleTaskClick = (task) => {
+    setSelectedTask(task);
+  };
+
   return (
     <div className="App">
         <header>
             <h1>Eisenhower Box</h1>
         </header>
-        
+
         <div className="main-content">
             <div className="side-tasks left-side">
                 <section className="completed-tasks">
@@ -178,6 +161,7 @@ const handleTaskDeletion = (task, quadrant) => {
                         {completedTasks.map((task, index) => (
                             <li key={index}>
                                 <span className="task" onClick={() => handleTaskClick(task)}>{task.title}</span>
+                                <DeleteIcon onClick={() => deleteCompletedTask(index)}>❌</DeleteIcon>
                             </li>
                         ))}
                     </ul>
@@ -240,23 +224,23 @@ const handleTaskDeletion = (task, quadrant) => {
         </div>
 
         {selectedTask && (
-    <div className="task-detail">
-        <h3>{selectedTask.title}</h3>
-        <textarea
-            value={descriptionInput}
-            onChange={(e) => setDescriptionInput(e.target.value)}
-            placeholder="Enter or edit description..."
-        />
-        <button onClick={() => {
-            updateTaskDescription(selectedTask, descriptionInput);
-            setSelectedTask(null); // Deselect task after update
-        }}>
-            Save Description
-        </button>
+            <div className="task-detail">
+                <h3>{selectedTask.title}</h3>
+                <textarea
+                    value={selectedTask ? selectedTask.description : ''}
+                    onChange={(e) => {
+                        const updatedDescription = e.target.value;
+                        setSelectedTask(prev => ({ ...prev, description: updatedDescription }));
+                        updateTaskDescription(selectedTask, updatedDescription);
+                    }}
+                    placeholder="Enter or edit description..."
+                />
+            </div>
+        )}
     </div>
-)}
-    </div>
-);
-        }
+  );
+}
+
 export default App;
+
 
