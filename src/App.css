@@ -57,11 +57,13 @@ button {
 }
 
 .task-done {
+  position: center;
   background-color: #4CAF50;
   color: white;
 }
 
-.task-cancel {
+.task-cancel {  
+  position: center;
   background-color: #F44336;
   color: white;
 }
