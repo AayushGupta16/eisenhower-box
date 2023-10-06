@@ -1,6 +1,6 @@
 .App {
   font-family: 'Arial', sans-serif;
-  background-color: #f2f2f2;
+  background-color: #e2e2d9;
   text-align: center;
   padding: 20px;
   display: flex;
@@ -19,11 +19,13 @@ header {
 }
 
 .side-tasks {
+  background-color: "#FDF4E3";
   width: 25%;
 }
 
 .eisenhower-box {
   display: grid;
+  background-color: "#FDF4E3";
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   width: 50%;
@@ -33,7 +35,7 @@ header {
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   padding: 20px;
-  background-color: #ffffff;
+  background-color: #FDF4E3;
 }
 
 h2 {
@@ -54,6 +56,8 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s;
+  background-color: "#FDF4E3";
+
 }
 
 .task-done {
@@ -101,6 +105,7 @@ input {
   border-radius: 5px;
   margin-top: 20px;
   outline: none;
+  background-color: "#FDF4E3";
 }
 
 input:focus {

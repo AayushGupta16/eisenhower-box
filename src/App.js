@@ -16,7 +16,7 @@ const Container = styled.div`
 const Column = styled.div`
   flex: 1;
   margin: 10px;
-  background: #ffffff;
+  background: #FDF4E3;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -28,7 +28,7 @@ const TaskComponent = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #fff;
+  background: #FDF4E3;
   border-radius: 8px;
   margin: 10px 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -242,5 +242,3 @@ function App() {
 }
 
 export default App;
-
-
