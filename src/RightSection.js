@@ -38,7 +38,6 @@ const RightSection = ({ onTaskComplete }) => {
   const removeTask = (index) => {
     setTasks(prevTasks => prevTasks.filter((_, i) => i !== index)); // Updated this lin
     posthog.capture('Task Removed', {property: 'Quick Task'});
-    e
   };
 
   return (

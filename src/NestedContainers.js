@@ -34,7 +34,7 @@ const NestedContainers = ({ onTaskComplete }) => {
       updatedTasks[index].push(e.target.value.trim());
       setTasks(updatedTasks);
       setIsAdding([false, false, false]);
-      posthog.capture('task entered', { section: titles[index] });
+      posthog.capture('Task Entered', { section: titles[index] });
     }
   };
 
@@ -43,14 +43,14 @@ const NestedContainers = ({ onTaskComplete }) => {
     const updatedTasks = [...tasks];
     updatedTasks[boxIndex].splice(taskIndex, 1);
     setTasks(updatedTasks);
-    posthog.capture('task completed', { section: titles[boxIndex] });
+    posthog.capture('Task Completed', { section: titles[boxIndex] });
   };
 
   const handleRemove = (boxIndex, taskIndex) => {
     const updatedTasks = [...tasks];
     updatedTasks[boxIndex].splice(taskIndex, 1);
     setTasks(updatedTasks);
-    posthog.capture('task canceled', { section: titles[boxIndex] });
+    posthog.capture('Task Removed', { section: titles[boxIndex] });
   };
   
   return (
