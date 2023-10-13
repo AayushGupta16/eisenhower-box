@@ -48,6 +48,7 @@ const NestedContainers = () => {
               position="absolute"
               top={0}
               left={0}
+              h="13%" 
               w="100%" 
               bg={titleBoxColors[i]}  // Applied colors from the titleBoxColors array
               border="1px solid #7A7A7A"
@@ -64,7 +65,7 @@ const NestedContainers = () => {
         {/* Staging Area */}
         <Box
           gridColumn="span 2" 
-          w="95%"
+          w="97%"
           h="80%"
           mt={25}  // Added margin-top here
           bg="#FDF4E3"
@@ -78,6 +79,7 @@ const NestedContainers = () => {
             position="absolute"
             top={0}
             left={0}
+            h="13%" 
             w="100%" 
             bg={titleBoxColors[2]}  // Applied the third color from the titleBoxColors array
             border="1px solid #7A7A7A"
