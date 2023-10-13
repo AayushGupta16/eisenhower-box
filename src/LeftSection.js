@@ -34,7 +34,7 @@ const LeftSection = () => {
         p={4}
         h="full"
       >
-        {"Content Here"}
+        {"no Here"}
       </Box>
     </Box>
   );
