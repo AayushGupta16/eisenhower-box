@@ -5,8 +5,8 @@ const RightSection = () => {
   return (
     <Box
       w="22%"
-      h="100vh"
-      mt="100px"  // Adjust this value to move the box up or down
+      h="85vh"
+      mt="90px"
       mr="25px"
       bg="#FDF4E3"
       p={4}

@@ -31,7 +31,7 @@ const CenterTopSection = () => {
       zIndex="2" 
     >
       <ResponsiveText>The Eisenhower Matrix</ResponsiveText>
-      <Flex mt={-20}>
+      <Flex mt={-30}>
         <LinkBox href="https://pomofocus.io" text="Pomodoro" />
         <LinkBox href="https://calendar.google.com" text="Calendar" />
         <LinkBox href="https://elms.umd.edu/" text="Canvas" />
@@ -49,7 +49,7 @@ const LinkBox = ({ text, href }) => {
       href={href} 
       target="_blank" 
       rel="noopener noreferrer" 
-      m={10} 
+      m={5} 
       p={4} 
       borderRadius="10px"
       bg="#E3DCF9"

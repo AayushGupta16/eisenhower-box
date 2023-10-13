@@ -16,7 +16,7 @@ const NestedContainers = () => {
   return (
     <Box
       position="absolute"
-      top="20%"
+      top="18%"
       w="50%"
       mx="auto"
       left={0}
@@ -27,7 +27,7 @@ const NestedContainers = () => {
       <Grid
         templateColumns="repeat(2, 1fr)"
         templateRows="auto auto" 
-        gap={6}
+        gap={2}
         h="100%"
       >
         {titles.slice(0, 2).map((title, i) => (  
@@ -36,7 +36,7 @@ const NestedContainers = () => {
             w="95%"
             h="100%"
             bg="#FDF4E3"
-            p={4}
+            p={2}
             boxShadow="lg"
             borderRadius="10px"
             position="relative"
@@ -67,9 +67,9 @@ const NestedContainers = () => {
           gridColumn="span 2" 
           w="97%"
           h="80%"
-          mt={25} 
+          mt={15} 
           bg="#FDF4E3"
-          p={4}
+          p={2}
           boxShadow="lg"
           borderRadius="10px"
           position="relative"
@@ -93,7 +93,6 @@ const NestedContainers = () => {
             <Text fontSize="20px">{titles[2]}</Text>  
           </Flex>
 
-          Container 3
         </Box>
       </Grid>
     </Box>

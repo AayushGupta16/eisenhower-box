@@ -5,10 +5,10 @@ const LeftSection = () => {
   return (
     <Box
       w="22%"
-      h="100vh"
+      h="85vh"
       bg="#FDF4E3"
       p={4}
-      mt="100px"  // Adjust this value to move the box up or down
+      mt="90px"  // Adjust this value to move the box up or down
       ml="25px"
       border="1px solid #7A7A7A"
       borderRadius="10px"
