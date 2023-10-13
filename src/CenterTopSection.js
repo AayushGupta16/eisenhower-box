@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { Flex, Button } from "@chakra-ui/react";
 
 const ResponsiveText = styled.h1`
-  font-size: 48px;
+  font-size: 40px;
   font-weight: normal;  // Add this line to make the text not bold
 
   @media (max-width: 1200px) {
@@ -25,13 +25,13 @@ const CenterTopSection = () => {
       direction="column"
       align="center"
       position="absolute"
-      top="-2%"
+      top="0%"
       left="50%"
       transform="translate(-50%, 0)"
       zIndex="2" 
     >
       <ResponsiveText>The Eisenhower Matrix</ResponsiveText>
-      <Flex mt={-30}>
+      <Flex mt={-25}>
         <LinkBox href="https://pomofocus.io" text="Pomodoro" />
         <LinkBox href="https://calendar.google.com" text="Calendar" />
         <LinkBox href="https://elms.umd.edu/" text="Canvas" />

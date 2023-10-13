@@ -8,15 +8,15 @@ const LeftSection = () => {
       h="85vh"
       bg="#FDF4E3"
       p={4}
-      mt="90px"  // Adjust this value to move the box up or down
+      mt="90px"
       ml="25px"
-      border="1px solid #7A7A7A"
+      border="1px solid #CDCDCD"
       borderRadius="10px"
+      position="relative" // Added for absolute positioning of the child
     >
       {/* Title Box */}
       <Flex
-        position="relative"
-        mt="-5px"  
+        mt="-5px"
         ml="-5px"
         top={0}
         left={0}
@@ -40,6 +40,17 @@ const LeftSection = () => {
       >
         {"Content Here"}
       </Box>
+
+      {/* Added "+ Add Task" to the bottom of the container */}
+      <Flex
+        position="absolute"
+        bottom={0}
+        left="50%"
+        transform="translateX(-50%)"
+        mb={4}
+      >
+        <Text fontSize="14px">+ Add Task</Text>
+      </Flex>
     </Box>
   );
 };

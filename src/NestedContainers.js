@@ -33,15 +33,14 @@ const NestedContainers = () => {
         {titles.slice(0, 2).map((title, i) => (  
           <Box
             key={i}
-            w="95%"
+            w="98%"
             h="100%"
             bg="#FDF4E3"
-            p={2}
+            p={0}
             boxShadow="lg"
             borderRadius="10px"
             position="relative"
             border="1px solid #CDCDCD"
-
           >
             {/* Title Box */}
             <Flex
@@ -60,12 +59,22 @@ const NestedContainers = () => {
             >
               <Text fontSize="20px">{title}</Text> 
             </Flex>
+            {/* Add Task Text */}
+            <Flex
+              position="absolute"
+              bottom={0}
+              left="50%"
+              transform="translateX(-50%)"
+              zIndex="1"
+            >
+              <Text fontSize="14px">+ Add Task</Text>
+            </Flex>
           </Box>
         ))}
         {/* Staging Area */}
         <Box
           gridColumn="span 2" 
-          w="97%"
+          w="99%"
           h="80%"
           mt={15} 
           bg="#FDF4E3"
@@ -81,7 +90,7 @@ const NestedContainers = () => {
             top={0}
             left={0}
             h="13%" 
-            w="99.5%" 
+            w="100%" 
             bg={titleBoxColors[2]}
             border="1px solid #7A7A7A"
             borderRadius="10px"
@@ -92,7 +101,16 @@ const NestedContainers = () => {
           >
             <Text fontSize="20px">{titles[2]}</Text>  
           </Flex>
-
+          {/* Add Task Text */}
+          <Flex
+              position="absolute"
+              bottom={0}
+              left="50%"
+              transform="translateX(-50%)"
+              zIndex="1"
+            >
+              <Text fontSize="14px">+ Add Task</Text>
+          </Flex>
         </Box>
       </Grid>
     </Box>

@@ -10,8 +10,9 @@ const RightSection = () => {
       mr="25px"
       bg="#FDF4E3"
       p={4}
-      border="1px solid #7A7A7A"
+      border="1px solid #CDCDCD"
       borderRadius="10px"
+      position="relative" // Added for absolute positioning of the child
     >
       {/* Title Box */}
       <Flex
@@ -21,7 +22,6 @@ const RightSection = () => {
         right={0}
         w="101%"
         h="6%"
-
         bg='rgba(68, 116, 238, 0.61)'
         border="1px solid #7A7A7A"
         borderRadius="10px"
@@ -40,6 +40,17 @@ const RightSection = () => {
       >
         {"Content Here"}
       </Box>
+
+      {/* Added "+ Add Task" to the bottom of the container */}
+      <Flex
+        position="absolute"
+        bottom={0}
+        left="50%"
+        transform="translateX(-50%)"
+        mb={4}
+      >
+        <Text fontSize="14px">+ Add Task</Text>
+      </Flex>
     </Box>
   );
 };
