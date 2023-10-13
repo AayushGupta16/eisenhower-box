@@ -26,7 +26,7 @@ const LeftSection = () => {
         mb={4}
       >
         
-        <Text>Completed Tasks</Text>
+        <Text>Completed Tasks EDIT MADE HERE</Text>
       </Flex>
 
 
