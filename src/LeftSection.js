@@ -25,7 +25,8 @@ const LeftSection = () => {
         padding={2}
         mb={4}
       >
-        <Text>Completed Tasks</Text>
+        
+        <Text>Completed Task s</Text>
       </Flex>
 
       <Box
