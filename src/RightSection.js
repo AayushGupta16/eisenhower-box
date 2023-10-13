@@ -1,22 +1,12 @@
-import { Box, Flex, Text, Input, Button, VStack } from "@chakra-ui/react";
-import { useState } from 'react';
+// RightSection.js
+import { Box, Flex, Text } from "@chakra-ui/react";
 
 const RightSection = () => {
-  const [tasks, setTasks] = useState([]);  // State to store tasks
-  const [inputValue, setInputValue] = useState('');  // State to store input value
-
-  const handleAddTask = () => {  // Function to add task
-    if (inputValue.trim() !== '') {
-      setTasks([...tasks, inputValue.trim()]);
-      setInputValue('');
-    }
-  };
-
   return (
     <Box
       w="22%"
       h="95vh"
-      mt="100px"
+      mt="100px"  // Adjust this value to move the box up or down
       mr="25px"
       bg="#FDF4E3"
       p={4}
@@ -43,18 +33,7 @@ const RightSection = () => {
         p={4}
         h="full"
       >
-        <Input 
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          placeholder="Add a new task"
-          mb={4}
-        />
-        <Button onClick={handleAddTask} mb={4}>Add Task</Button>
-        <VStack align="start" spacing={2}>
-          {tasks.map((task, index) => (
-            <Text key={index}>{task}</Text>  // Display each task
-          ))}
-        </VStack>
+        {"Content Here"}
       </Box>
     </Box>
   );
