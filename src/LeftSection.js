@@ -26,8 +26,9 @@ const LeftSection = () => {
         mb={4}
       >
         
-        <Text>Completed Task s</Text>
+        <Text>Completed Tasks</Text>
       </Flex>
+
 
       <Box
         bg="#FDF4E3"
