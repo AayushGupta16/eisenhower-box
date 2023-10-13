@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { Box, Flex, Text } from "@chakra-ui/react";
 
-const LeftSection = ({ completedTasks, resetTasks }) => { // Included resetTasks as a prop
+const LeftSection = ({ completedTasks, resetTasks }) => { 
 
   const calculateTimeUntil5am = () => {
     const now = new Date();
     const fiveAM = new Date(now);
-    fiveAM.setHours(5, 0, 0, 0);
+    fiveAM.setHours(6, 0, 0, 0);
     if (now > fiveAM) {
-      fiveAM.setDate(fiveAM.getDate() + 1); // It's already past 5am today, set for 5am next day
+      fiveAM.setDate(fiveAM.getDate() + 1);
     }
     return fiveAM - now;
   };
@@ -19,7 +19,7 @@ const LeftSection = ({ completedTasks, resetTasks }) => { // Included resetTasks
       resetTasks();
     }, timeUntil5am);
 
-    return () => clearTimeout(timerId); // Cleanup on unmount or if dependencies change
+    return () => clearTimeout(timerId); 
   }, [resetTasks]);
 
   return (
@@ -55,11 +55,21 @@ const LeftSection = ({ completedTasks, resetTasks }) => { // Included resetTasks
 
       <Box bg="#FDF4E4" p={4} h="full">
         {completedTasks.map((task, index) => (
-          <Text key={index} mb={2}>{task}</Text>
+          <Flex
+            key={index}
+            mb={3}  
+            className="taskItem"
+            p={2}  // Increased the internal padding for each task
+            borderRadius="10"  
+            _hover={{ bgColor: "gray.200" }}  
+            transition="background-color 0.3s ease"
+          >
+            <Text>{task}</Text>
+          </Flex>
         ))}
       </Box>
 
-      {/* Updated this part */}
+      {/* Tasks Completed Count */}
       <Flex
         position="absolute"
         bottom={5}

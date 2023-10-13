@@ -9,12 +9,26 @@ import './App.css';
 function App() {
   const [completedTasks, setCompletedTasks] = useState([]);
 
+  const loadCompletedTasks = () => {
+    const tasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
+    setCompletedTasks(tasks);
+  };
+
+  useEffect(() => {
+    loadCompletedTasks();
+  }, []);
+
   const handleTaskComplete = (task) => {
-    setCompletedTasks(prevTasks => [...prevTasks, task]);
+    setCompletedTasks(prevTasks => {
+      const updatedTasks = [...prevTasks, task];
+      localStorage.setItem('completedTasks', JSON.stringify(updatedTasks));
+      return updatedTasks;
+    });
   };
 
   const resetTasks = () => {
-    setCompletedTasks([]); // Reset the completed tasks
+    setCompletedTasks([]);
+    localStorage.removeItem('completedTasks');
   };
 
   useEffect(() => {
@@ -33,7 +47,7 @@ function App() {
       <Flex width="full">
         <LeftSection 
           completedTasks={completedTasks} 
-          resetTasks={resetTasks} // pass the resetTasks function as a prop
+          resetTasks={resetTasks}
         />
         <CenterTopSection />
         <Box flex="1">

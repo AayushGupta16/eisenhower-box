@@ -18,7 +18,7 @@ body, #root {
 }
 
 .taskItem:hover {
-  background-color: lightgray !important;
+  background-color: rgb(229, 229, 229) !important;
 }
 
 .taskItem {
@@ -28,4 +28,14 @@ body, #root {
 .taskItem > * {
   padding: 5px !important;  /* Adjust this value */
 }
+/* Add this to your CSS */
+.taskItem {
+  /* ... your existing styles ... */
+  transition: background-color 0.3s ease;
+}
+
+.taskItem.is-dragging {
+  background-color: lightgreen;
+}
+
 

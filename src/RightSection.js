@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
-import { Box, Flex, Text, Input, IconButton } from "@chakra-ui/react";
-import { CheckIcon, CloseIcon } from '@chakra-ui/icons'; // Import icons
+import React, { useState, useEffect } from 'react';
+import { Box, Grid, Flex, Text, Input, IconButton } from "@chakra-ui/react";
+import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 
 const RightSection = ({ onTaskComplete }) => {
+  const [showIcons, setShowIcons] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem('rightTasks');
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('rightTasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   const handleAddClick = () => {
     setIsAdding(true);
@@ -63,11 +71,30 @@ const RightSection = ({ onTaskComplete }) => {
         h="full"
       >
         {tasks.map((task, index) => (
-          <Flex key={index} mb={2} align="center">
-            <Text flex="1">{task}</Text>
-            <IconButton icon={<CheckIcon />} onClick={() => completeTask(index)} /> {/* Changed here */}
-            <IconButton icon={<CloseIcon />} onClick={() => removeTask(index)} ml={2} /> {/* Changed here */}
-          </Flex>
+          <Flex 
+          key={index} 
+          borderRadius="5"
+          className="taskItem"
+          onMouseEnter={() => setShowIcons(index)}
+          onMouseLeave={() => setShowIcons(null)}
+        >
+          <Text flex="1" mb={0} lineHeight="tight" pl={2} minH="0">{task}</Text> {/* Added left padding here */}
+          {showIcons === index && (
+            <>
+              <IconButton 
+                icon={<CheckIcon />} 
+                onClick={() => completeTask(index)} 
+                borderRadius="5"
+                ight margin here
+              />
+              <IconButton 
+                icon={<CloseIcon />} 
+                onClick={() => removeTask(index)} 
+                borderRadius="5"
+              />
+            </>
+          )}
+        </Flex>
         ))}
       </Box>
 
