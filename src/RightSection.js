@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Grid, Flex, Text, Input, IconButton } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
+import posthog from 'posthog-js';
+
 
 const RightSection = ({ onTaskComplete }) => {
   const [showIcons, setShowIcons] = useState(null);
@@ -22,16 +24,21 @@ const RightSection = ({ onTaskComplete }) => {
     if (e.key === 'Enter' && e.target.value.trim() !== '') {
       setTasks([...tasks, e.target.value]);
       setIsAdding(false);
+      posthog.capture('Task Entered', {property: 'Quick Task'});
     }
   };
 
   const completeTask = (index) => {
     onTaskComplete(tasks[index]);
     setTasks(prevTasks => prevTasks.filter((_, i) => i !== index)); // Updated this line
+    posthog.capture('Task Completed', {property: 'Quick Task'});
+
   };
 
   const removeTask = (index) => {
-    setTasks(prevTasks => prevTasks.filter((_, i) => i !== index)); // Updated this line
+    setTasks(prevTasks => prevTasks.filter((_, i) => i !== index)); // Updated this lin
+    posthog.capture('Task Removed', {property: 'Quick Task'});
+    e
   };
 
   return (

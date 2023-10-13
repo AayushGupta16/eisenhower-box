@@ -1,6 +1,7 @@
 import { Box, Grid, Flex, Text, Input, IconButton } from "@chakra-ui/react";
 import { useState, useEffect } from 'react';
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
+import posthog from 'posthog-js';
 
 const titles = [
   'Urgent',
@@ -33,6 +34,7 @@ const NestedContainers = ({ onTaskComplete }) => {
       updatedTasks[index].push(e.target.value.trim());
       setTasks(updatedTasks);
       setIsAdding([false, false, false]);
+      posthog.capture('task entered', { section: titles[index] });
     }
   };
 
@@ -41,12 +43,14 @@ const NestedContainers = ({ onTaskComplete }) => {
     const updatedTasks = [...tasks];
     updatedTasks[boxIndex].splice(taskIndex, 1);
     setTasks(updatedTasks);
+    posthog.capture('task completed', { section: titles[boxIndex] });
   };
 
   const handleRemove = (boxIndex, taskIndex) => {
     const updatedTasks = [...tasks];
     updatedTasks[boxIndex].splice(taskIndex, 1);
     setTasks(updatedTasks);
+    posthog.capture('task canceled', { section: titles[boxIndex] });
   };
   
   return (

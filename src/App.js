@@ -4,9 +4,12 @@ import LeftSection from './LeftSection';
 import RightSection from './RightSection';
 import CenterTopSection from './CenterTopSection';
 import NestedContainers from './NestedContainers';
+import posthog from 'posthog-js'
 import './App.css';
 
 function App() {
+  posthog.init('phc_HcfimXNliJtxmCnwXFZAydaNmtmzb7HUytfYXysbm8E', { api_host: 'https://app.posthog.com' })
+
   const [completedTasks, setCompletedTasks] = useState([]);
 
   const loadCompletedTasks = () => {
