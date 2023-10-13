@@ -1,4 +1,9 @@
-body, #root {
+/* Add this line at the top of your CSS file to import Titillium Web from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap');
+
+
+ody, #root {
+  font-family: 'Titillium Web', sans-serif;
   background-color: #F3EAF1;
   margin: 0;
   height: 100%;
