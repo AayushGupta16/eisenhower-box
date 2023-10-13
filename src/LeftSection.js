@@ -1,7 +1,27 @@
-// LeftSection.js
+import React, { useEffect } from 'react';
 import { Box, Flex, Text } from "@chakra-ui/react";
 
-const LeftSection = () => {
+const LeftSection = ({ completedTasks, resetTasks }) => { // Included resetTasks as a prop
+
+  const calculateTimeUntil5am = () => {
+    const now = new Date();
+    const fiveAM = new Date(now);
+    fiveAM.setHours(5, 0, 0, 0);
+    if (now > fiveAM) {
+      fiveAM.setDate(fiveAM.getDate() + 1); // It's already past 5am today, set for 5am next day
+    }
+    return fiveAM - now;
+  };
+
+  useEffect(() => {
+    const timeUntil5am = calculateTimeUntil5am();
+    const timerId = setTimeout(() => {
+      resetTasks();
+    }, timeUntil5am);
+
+    return () => clearTimeout(timerId); // Cleanup on unmount or if dependencies change
+  }, [resetTasks]);
+
   return (
     <Box
       w="22%"
@@ -12,7 +32,7 @@ const LeftSection = () => {
       ml="25px"
       border="1px solid #CDCDCD"
       borderRadius="10px"
-      position="relative" // Added for absolute positioning of the child
+      position="relative"
     >
       {/* Title Box */}
       <Flex
@@ -33,23 +53,21 @@ const LeftSection = () => {
         <Text fontSize="20px">Completed Tasks</Text>
       </Flex>
 
-      <Box
-        bg="#FDF4E4"
-        p={4}
-        h="full"
-      >
-        {""}
+      <Box bg="#FDF4E4" p={4} h="full">
+        {completedTasks.map((task, index) => (
+          <Text key={index} mb={2}>{task}</Text>
+        ))}
       </Box>
 
-      {/* Added "+ Add Task" to the bottom of the container */}
+      {/* Updated this part */}
       <Flex
         position="absolute"
-        bottom={0}
+        bottom={5}
         left="50%"
         transform="translateX(-50%)"
         mb={4}
       >
-        <Text fontSize="14px">+ Add Task</Text>
+        <Text fontSize="14px">{completedTasks.length} Tasks Completed Today</Text> 
       </Flex>
     </Box>
   );

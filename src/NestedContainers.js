@@ -1,4 +1,6 @@
-import { Box, Grid, Flex, Text } from "@chakra-ui/react";
+import { Box, Grid, Flex, Text, Input, IconButton } from "@chakra-ui/react";
+import { useState } from 'react';
+import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 
 const titles = [
   'Urgent',
@@ -12,7 +14,35 @@ const titleBoxColors = [
   '#D4D4D4'
 ];  
 
-const NestedContainers = () => {
+
+const NestedContainers = ({ onTaskComplete }) => {  // Make sure you're receiving onTaskComplete as a prop
+  const [tasks, setTasks] = useState([[], [], []]);
+  const [isAdding, setIsAdding] = useState([false, false, false]);
+  const [showIcons, setShowIcons] = useState(null);
+
+  const handleKeyPress = (e, index) => {
+    if (e.key === 'Enter' && e.target.value.trim() !== '') {
+      const updatedTasks = [...tasks];
+      updatedTasks[index].push(e.target.value);
+      setTasks(updatedTasks);
+      setIsAdding([false, false, false]);
+    }
+  };
+
+  const handleComplete = (boxIndex, taskIndex) => {
+    onTaskComplete(tasks[boxIndex][taskIndex]);  // Here you need to call the onTaskComplete method
+    
+    const updatedTasks = [...tasks];
+    updatedTasks[boxIndex].splice(taskIndex, 1);
+    setTasks(updatedTasks);
+  };
+
+  const handleRemove = (boxIndex, taskIndex) => {
+    const updatedTasks = [...tasks];
+    updatedTasks[boxIndex].splice(taskIndex, 1);
+    setTasks(updatedTasks);
+  };
+
   return (
     <Box
       position="absolute"
@@ -30,47 +60,119 @@ const NestedContainers = () => {
         gap={2}
         h="100%"
       >
-        {titles.slice(0, 2).map((title, i) => (  
-          <Box
-            key={i}
-            w="98%"
-            h="100%"
-            bg="#FDF4E3"
-            p={0}
-            boxShadow="lg"
-            borderRadius="10px"
-            position="relative"
-            border="1px solid #CDCDCD"
-          >
-            {/* Title Box */}
-            <Flex
-              position="absolute"
-              top={0}
-              left={0}
-              h="13%" 
-              w="99%" 
-              bg={titleBoxColors[i]}
-              border="1px solid #7A7A7A"
-              borderRadius="10px"
-              justify="center"
-              align="center"
-              padding={2}
-              zIndex="1"
-            >
-              <Text fontSize="20px">{title}</Text> 
-            </Flex>
-            {/* Add Task Text */}
-            <Flex
-              position="absolute"
-              bottom={0}
-              left="50%"
-              transform="translateX(-50%)"
-              zIndex="1"
-            >
-              <Text fontSize="14px">+ Add Task</Text>
-            </Flex>
-          </Box>
-        ))}
+{titles.slice(0, 2).map((title, i) => (  
+  <Box
+  key={i}
+  w="98%"
+  h="100%"
+  bg="#FDF4E3"
+  p={0}
+  boxShadow="lg"
+  borderRadius="10px"
+  position="relative"
+  border="1px solid #CDCDCD"
+>
+  {/* Title Box */}
+  <Flex
+    position="absolute"
+    top={0}
+    left={0}
+    h="13%" 
+    w="99%" 
+    bg={titleBoxColors[i]}
+    border="1px solid #7A7A7A"
+    borderRadius="10px"
+    justify="center"
+    align="center"
+    padding={2}
+    zIndex="1"
+  >
+    <Text fontSize="20px">{title}</Text> 
+  </Flex>
+
+  {/* New wrapping Box for tasks */}
+  <Box 
+    position="absolute"
+    top="13%"  // Start from the bottom of the title box
+    left="0"
+    h="87%"  // The remaining height of the main container
+    w="100%"
+  >
+<Box bg="#FDF4E4" p={8} h="full">
+  {tasks[i].map((task, index) => (
+    <Flex 
+      key={index} 
+      borderRadius="5"
+      className="taskItem"
+      onMouseEnter={() => setShowIcons(index)}
+      onMouseLeave={() => setShowIcons(null)}
+    >
+      <Text flex="1" mb={0} lineHeight="tight" pl={2} minH="0">{task}</Text> {/* Added left padding here */}
+      {showIcons === index && (
+        <>
+          <IconButton 
+            icon={<CheckIcon />} 
+            onClick={() => handleComplete(i, index)} 
+            borderRadius="5"
+            ight margin here
+          />
+          <IconButton 
+            icon={<CloseIcon />} 
+            onClick={() => handleRemove(i, index)} 
+            borderRadius="5"
+          />
+        </>
+      )}
+    </Flex>
+  ))}
+</Box>
+
+
+
+
+
+
+
+
+  </Box>
+
+
+    {/* Add Task Text */}
+    {isAdding[i] ? (
+      <Input
+        position="absolute"
+        bottom={5}
+        left="50%"
+        transform="translateX(-50%)"
+        onKeyPress={(e) => handleKeyPress(e, i)}
+        onBlur={() => setIsAdding([false, false, false])}
+        autoFocus
+        borderRadius="10px"
+        bg="#FDF4E3"
+        placeholder=""
+      />
+    ) : (
+      <Flex
+        position="absolute"
+        bottom={5}
+        mb="2"
+        left="50%"
+        transform="translateX(-50%)"
+        zIndex="1"
+        onClick={() => {
+          let addingState = [false, false, false];
+          addingState[i] = true;
+          setIsAdding(addingState);
+        }}
+        cursor="pointer"
+      >
+        <Text fontSize="14px">+ Add Task</Text>
+      </Flex>
+    )}
+  </Box>
+))}
+
+        
         {/* Staging Area */}
         <Box
           gridColumn="span 2" 
@@ -101,16 +203,55 @@ const NestedContainers = () => {
           >
             <Text fontSize="20px">{titles[2]}</Text>  
           </Flex>
+          
+          {/* New wrapping Box for tasks */}
+          <Box 
+            position="absolute"
+            top="13%"  // Start from the bottom of the title box
+            left="0"
+            h="87%"  // The remaining height of the main container
+            w="100%"
+          >
+            <Box bg="#FDF4E4" p={8} h="full">
+              {tasks[2].map((task, index) => (
+                <Text key={index} my={1}>{task}</Text>
+              ))}
+            </Box>
+
+          </Box>
+
+
           {/* Add Task Text */}
-          <Flex
+          {isAdding[2] ? (
+            <Input
               position="absolute"
-              bottom={0}
+              bottom={15}
+              left="50%"
+              transform="translateX(-50%)"
+              onKeyPress={(e) => handleKeyPress(e, 2)}
+              onBlur={() => setIsAdding([false, false, false])}
+              autoFocus
+              borderRadius="10px"
+              bg="#FDF4E3"
+              placeholder=""
+            />
+          ) : (
+            <Flex
+              position="absolute"
+              bottom={5}
               left="50%"
               transform="translateX(-50%)"
               zIndex="1"
+              onClick={() => {
+                let addingState = [false, false, false];
+                addingState[2] = true;
+                setIsAdding(addingState);
+              }}
+              cursor="pointer"
             >
               <Text fontSize="14px">+ Add Task</Text>
-          </Flex>
+            </Flex>
+          )}
         </Box>
       </Grid>
     </Box>

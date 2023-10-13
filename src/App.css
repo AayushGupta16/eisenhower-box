@@ -8,4 +8,24 @@ body, #root {
   background-color: #F3EAF1;
   margin: 0;
   height: 100%;
+  
 }
+
+
+[class^="chakra-text"] {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.taskItem:hover {
+  background-color: lightgray !important;
+}
+
+.taskItem {
+  padding: 0 !important;
+}
+
+.taskItem > * {
+  padding: 5px !important;  /* Adjust this value */
+}
+
