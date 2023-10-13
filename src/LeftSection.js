@@ -29,7 +29,7 @@ const LeftSection = () => {
       </Flex>
 
       <Box
-        bg="#FDF4E3"
+        bg="#FDF4E4"
         p={4}
         h="full"
       >
