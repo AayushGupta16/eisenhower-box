@@ -38,7 +38,7 @@ const LeftSection = () => {
         p={4}
         h="full"
       >
-        {"Content Here"}
+        {""}
       </Box>
 
       {/* Added "+ Add Task" to the bottom of the container */}
