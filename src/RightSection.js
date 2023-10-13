@@ -5,20 +5,21 @@ const RightSection = () => {
   return (
     <Box
       w="22%"
-      h="95vh"
+      h="100vh"
       mt="100px"  // Adjust this value to move the box up or down
       mr="25px"
       bg="#FDF4E3"
       p={4}
+      border="1px solid #7A7A7A"
       borderRadius="10px"
     >
       {/* Title Box */}
       <Flex
-        mt="-15px"  
-        ml="-8px"
+        mt="-5px"  
+        ml="-5px"
         top={0}
         right={0}
-        w="102%"
+        w="101%"
         h="6%"
 
         bg='rgba(68, 116, 238, 0.61)'

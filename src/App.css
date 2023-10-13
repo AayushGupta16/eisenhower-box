@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap');
 
 
-ody, #root {
+body, #root {
+  /* overflow: hidden; */
   font-family: 'Titillium Web', sans-serif;
   background-color: #F3EAF1;
   margin: 0;

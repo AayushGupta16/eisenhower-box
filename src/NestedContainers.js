@@ -1,4 +1,3 @@
-// NestedContainers.js
 import { Box, Grid, Flex, Text } from "@chakra-ui/react";
 
 const titles = [
@@ -7,11 +6,10 @@ const titles = [
   'Staging Area'
 ];
 
-// Updated the colors array to reflect the removal of the "Non-Important & Urgent" section
 const titleBoxColors = [
   'rgba(244, 107, 107, 0.72)', 
   '#FFBA7A', 
-  '#7A7A7A'
+  '#D4D4D4'
 ];  
 
 const NestedContainers = () => {
@@ -42,6 +40,8 @@ const NestedContainers = () => {
             boxShadow="lg"
             borderRadius="10px"
             position="relative"
+            border="1px solid #CDCDCD"
+
           >
             {/* Title Box */}
             <Flex
@@ -49,8 +49,8 @@ const NestedContainers = () => {
               top={0}
               left={0}
               h="13%" 
-              w="100%" 
-              bg={titleBoxColors[i]}  // Applied colors from the titleBoxColors array
+              w="99%" 
+              bg={titleBoxColors[i]}
               border="1px solid #7A7A7A"
               borderRadius="10px"
               justify="center"
@@ -67,12 +67,13 @@ const NestedContainers = () => {
           gridColumn="span 2" 
           w="97%"
           h="80%"
-          mt={25}  // Added margin-top here
+          mt={25} 
           bg="#FDF4E3"
           p={4}
           boxShadow="lg"
           borderRadius="10px"
           position="relative"
+          border="1px solid #CDCDCD"
         >
           {/* Title Box */}
           <Flex
@@ -80,8 +81,8 @@ const NestedContainers = () => {
             top={0}
             left={0}
             h="13%" 
-            w="100%" 
-            bg={titleBoxColors[2]}  // Applied the third color from the titleBoxColors array
+            w="99.5%" 
+            bg={titleBoxColors[2]}
             border="1px solid #7A7A7A"
             borderRadius="10px"
             justify="center"
