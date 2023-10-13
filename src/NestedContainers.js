@@ -4,11 +4,10 @@ import { Box, Grid, Flex, Text } from "@chakra-ui/react";
 const titles = [
   'Urgent',
   'Not Urgent',
-  'Non-Important & Urgent',
   'Staging Area'
 ];
 
-// Defined the colors with transparency as per the requirements
+// Updated the colors array to reflect the removal of the "Non-Important & Urgent" section
 const titleBoxColors = [
   'rgba(244, 107, 107, 0.72)', 
   '#FFBA7A', 
@@ -58,9 +57,8 @@ const NestedContainers = () => {
               padding={2}
               zIndex="1"
             >
-              <Text>{title}</Text>
+              <Text fontSize="20px">{title}</Text> 
             </Flex>
-
           </Box>
         ))}
         {/* Staging Area */}
@@ -68,7 +66,7 @@ const NestedContainers = () => {
           gridColumn="span 2" 
           w="95%"
           h="80%"
-          mt={25} 
+          mt={25}  // Added margin-top here
           bg="#FDF4E3"
           p={4}
           boxShadow="lg"
@@ -89,7 +87,7 @@ const NestedContainers = () => {
             padding={2}
             zIndex="1"
           >
-            <Text>{titles[3]}</Text>  
+            <Text fontSize="20px">{titles[2]}</Text>  
           </Flex>
 
           Container 3

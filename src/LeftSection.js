@@ -15,9 +15,12 @@ const LeftSection = () => {
       {/* Title Box */}
       <Flex
         position="relative"
+        mt="-15px"  
+        ml="-10px"
         top={0}
         left={0}
-        w="100%"
+        w="102%"
+        h="6%"
         bg='rgba(135, 200, 134, 0.67)'
         border="1px solid #7A7A7A"
         borderRadius="10px"
@@ -26,7 +29,7 @@ const LeftSection = () => {
         padding={2}
         mb={4}
       >
-        <Text>Completed Tasks</Text>
+        <Text fontSize="20px">Completed Tasks</Text>
       </Flex>
 
       <Box

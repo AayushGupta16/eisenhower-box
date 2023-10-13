@@ -14,9 +14,13 @@ const RightSection = () => {
     >
       {/* Title Box */}
       <Flex
+        mt="-15px"  
+        ml="-8px"
         top={0}
         right={0}
-        w="100%"
+        w="102%"
+        h="6%"
+
         bg='rgba(68, 116, 238, 0.61)'
         border="1px solid #7A7A7A"
         borderRadius="10px"
@@ -25,12 +29,12 @@ const RightSection = () => {
         padding={2}
         mb={4}
       >
-        <Text>Quick Tasks</Text>
+        <Text fontSize="20px">Quick Tasks</Text>
       </Flex>
 
       <Box
         bg="#FDF4E3"
-        p={4}
+        p={8}
         h="full"
       >
         {"Content Here"}
