@@ -6,7 +6,7 @@ const LeftSection = ({ completedTasks, resetTasks }) => {
   const calculateTimeUntil5am = () => {
     const now = new Date();
     const fiveAM = new Date(now);
-    fiveAM.setHours(6, 0, 0, 0);
+    fiveAM.setHours(5, 0, 0, 0);
     if (now > fiveAM) {
       fiveAM.setDate(fiveAM.getDate() + 1);
     }

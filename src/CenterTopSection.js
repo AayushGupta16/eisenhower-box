@@ -25,13 +25,13 @@ const CenterTopSection = () => {
       direction="column"
       align="center"
       position="absolute"
-      top="0%"
+      top="-1%"
       left="50%"
       transform="translate(-50%, 0)"
       zIndex="2" 
     >
       <ResponsiveText>The Eisenhower Matrix</ResponsiveText>
-      <Flex mt={-25}>
+      <Flex mt={-20}>
         <LinkBox href="https://pomofocus.io" text="Pomodoro" />
         <LinkBox href="https://calendar.google.com" text="Calendar" />
         <LinkBox href="https://elms.umd.edu/" text="Canvas" />
@@ -49,7 +49,7 @@ const LinkBox = ({ text, href }) => {
       href={href} 
       target="_blank" 
       rel="noopener noreferrer" 
-      m={5} 
+      m={10} 
       p={4} 
       borderRadius="10px"
       bg="#E3DCF9"
