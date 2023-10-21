@@ -3,22 +3,19 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 
 const LeftSection = ({ completedTasks, resetTasks }) => { 
 
-  const calculateTimeUntil5am = () => {
+  const calculateTimeUntilMidnight = () => {
     const now = new Date();
-    const fiveAM = new Date(now);
-    fiveAM.setHours(5, 0, 0, 0);
-    if (now > fiveAM) {
-      fiveAM.setDate(fiveAM.getDate() + 1);
-    }
-    return fiveAM - now;
+    const midnight = new Date(now);
+    midnight.setHours(24, 0, 0, 0); // Setting the time to the next midnight
+    return midnight - now;
   };
 
   useEffect(() => {
-    const timeUntil5am = calculateTimeUntil5am();
+    const timeUntilMidnight = calculateTimeUntilMidnight();
     const timerId = setTimeout(() => {
       resetTasks();
-    }, timeUntil5am);
-
+    }, timeUntilMidnight);
+  
     return () => clearTimeout(timerId); 
   }, [resetTasks]);
 
@@ -64,7 +61,7 @@ const LeftSection = ({ completedTasks, resetTasks }) => {
             _hover={{ bgColor: "gray.200" }}  
             transition="background-color 0.3s ease"
           >
-            <Text>{task}</Text>
+            <Text textDecoration="line-through">{task}</Text>
           </Flex>
         ))}
       </Box>
